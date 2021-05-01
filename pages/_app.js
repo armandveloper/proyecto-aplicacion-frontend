@@ -1,9 +1,12 @@
 import { AuthProvider } from '../context/auth/AuthContext';
+import { AppProvider } from '../context/app/AppContext';
 
 function MyApp({ Component, pageProps }) {
 	return (
 		<AuthProvider>
-			<Component {...pageProps} />
+			<AppProvider>
+				<Component {...pageProps} />
+			</AppProvider>
 		</AuthProvider>
 	);
 }

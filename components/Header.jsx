@@ -1,21 +1,28 @@
-import Link from 'next/link';
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { AuthContext } from '../context/auth/AuthContext';
+import { AppContext } from '../context/app/AppContext';
 
 function Header() {
 	const { user, isAuthenticated, logout } = useContext(AuthContext);
+	const { resetApp } = useContext(AppContext);
+
+	const router = useRouter();
 
 	return (
 		<header className="py-8 flex flex-col md:flex-row items-center justify-between">
-			<Link href="/">
-				<img
-					width={256}
-					height={48}
-					src="/logo.svg"
-					alt="NodeSend Logo"
-					className="w-64 mb-8 md:mb-0"
-				/>
-			</Link>
+			<img
+				onClick={() => {
+					resetApp();
+					router.push('/');
+				}}
+				width={256}
+				height={48}
+				src="/logo.svg"
+				alt="NodeSend Logo"
+				className="w-64 mb-8 md:mb-0 cursor-pointer"
+			/>
 			<div>
 				{isAuthenticated ? (
 					<div className="flex items-center ">

@@ -31,6 +31,12 @@ export const AuthProvider = ({ children }) => {
 				type: types.AUTH_ON_REGISTER_FAIL,
 				payload: err.response.data.msg,
 			});
+		} finally {
+			window.setTimeout(() => {
+				dispatch({
+					type: types.UI_CLEAR_ALERT,
+				});
+			}, 3000);
 		}
 	};
 
@@ -48,6 +54,11 @@ export const AuthProvider = ({ children }) => {
 				type: types.AUTH_ON_LOGIN_FAIL,
 				payload: err.response.data.msg,
 			});
+			window.setTimeout(() => {
+				dispatch({
+					type: types.UI_CLEAR_ALERT,
+				});
+			}, 3000);
 		}
 	};
 
@@ -62,12 +73,16 @@ export const AuthProvider = ({ children }) => {
 				type: types.AUTH_SET_USER,
 				payload: resp.data.user || null,
 			});
-		} catch (err) {
-			console.log(err);
+		} catch {
 			dispatch({
 				type: types.AUTH_ON_LOGIN_FAIL,
 				payload: 'Ocurrió un error inesperado',
 			});
+			window.setTimeout(() => {
+				dispatch({
+					type: types.UI_CLEAR_ALERT,
+				});
+			}, 3000);
 		}
 	};
 

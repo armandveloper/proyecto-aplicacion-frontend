@@ -41,7 +41,7 @@ function Login() {
 				<h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
 					Iniciar sesión
 				</h2>
-				{message && <Alert />}
+				{message && <Alert message={message} />}
 				<div className="flex justify-center mt-5">
 					<div className="w-full max-w-lg">
 						<form
