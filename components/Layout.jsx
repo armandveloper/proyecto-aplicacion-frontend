@@ -14,7 +14,7 @@ function Layout({ children }) {
 			<div className="bg-gray-100 min-h-screen">
 				<div className="container mx-auto">
 					<Header />
-					<main className="mt-20">{children}</main>
+					<main className="sm:mt-5 md:mt-20">{children}</main>
 				</div>
 			</div>
 		</>

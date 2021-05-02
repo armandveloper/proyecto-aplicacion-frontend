@@ -45,7 +45,7 @@ function Dropzone() {
 	));
 
 	return (
-		<div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0 flex flex-col items-center justify-center border-dashed border-gray-300 border-2 bg-gray-100 px-4">
+		<div className="md:flex-1 mb-3 mx-2 flex flex-col items-center justify-center border-dashed border-gray-300 border-2 bg-gray-100 px-4">
 			{acceptedFiles.length > 0 ? (
 				<div className="mt-10 w-full">
 					<h4 className="text-2xl font-bold text-center mb-4">

@@ -6,15 +6,22 @@ import Layout from '../../components/Layout';
 import Alert from '../../components/Alert';
 
 export async function getServerSideProps({ params }) {
-	const { slug } = params;
-	const resp = await apiClient.get(`/links/${slug}`);
-	return {
-		props: {
-			filename: resp.data.filename,
-			password: resp.data.password,
-			url: resp.data.url,
-		},
-	};
+	try {
+		const { slug } = params;
+		const resp = await apiClient.get(`/links/${slug}`);
+		return {
+			props: {
+				filename: resp.data.filename,
+				password: resp.data.password,
+				url: resp.data.url,
+			},
+		};
+	} catch (err) {
+		console.log(err);
+		return {
+			notFound: true,
+		};
+	}
 }
 
 export async function getServerSidePaths() {
@@ -50,8 +57,6 @@ function Link({ filename, password, url }) {
 			const resp = await apiClient.post(`/links/${url}`, {
 				password: _password,
 			});
-			console.log(resp.data);
-
 			if (resp.data.success) {
 				setHasPassword(false);
 			}
@@ -63,8 +68,7 @@ function Link({ filename, password, url }) {
 		}
 	};
 
-	const handleDownload = async (e) => {
-		e.preventDefault();
+	const handleDownload = async () => {
 		try {
 			const resp = await apiClient.get(`/files/${filename}/exists`);
 			if (!resp.data.success) return;
@@ -82,7 +86,7 @@ function Link({ filename, password, url }) {
 	if (downloadsExceed) {
 		return (
 			<Layout>
-				<h1 className="text-2xl text-center text-gray-700">
+				<h1 className="text-2xl text-center text-gray-700 px-2">
 					El archivo ha superado el límite de descargas establecido
 					por el autor
 				</h1>

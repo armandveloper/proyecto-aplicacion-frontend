@@ -25,11 +25,11 @@ function Header() {
 			/>
 			<div>
 				{isAuthenticated ? (
-					<div className="flex items-center ">
+					<div className="sm:flex sm:items-center">
 						<p>Bienvenido: {user?.name}</p>
 						<button
 							onClick={logout}
-							className="bg-black px-5 py-3 rounded-lg text-white font-bold uppercase ml-2"
+							className="bg-black px-5 py-3 rounded-lg text-white font-bold uppercase ml-2 w-full sm:w-auto mt-2 sm:mt-0"
 							type="button"
 						>
 							Cerrar sesión

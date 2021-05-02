@@ -25,7 +25,11 @@ function Register() {
 			password: '',
 		},
 		validationSchema: RegisterSchema,
-		onSubmit: register,
+		onSubmit: (values) => {
+			register(values).then(() => {
+				formik.resetForm();
+			});
+		},
 	});
 
 	const { name, email, password } = formik.values;
