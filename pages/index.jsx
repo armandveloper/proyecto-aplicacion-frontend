@@ -1,24 +1,17 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import Link from 'next/link';
-import { AuthContext } from '../context/auth/AuthContext';
 import { AppContext } from '../context/app/AppContext';
 import Layout from '../components/Layout';
 import Dropzone from '../components/Dropzone';
 import Alert from '../components/Alert';
 
 function Home() {
-	const { getAuthUser, isAuthenticated } = useContext(AuthContext);
 
 	const { alertMessage, url } = useContext(AppContext);
 
 	const urlRef = useRef();
 
-	useEffect(() => {
-		const token = window.localStorage.getItem('nodesend:token');
-		if (token) {
-			getAuthUser();
-		}
-	}, []);
+	
 
 	const copyURL = async () => {
 		const fileURL = `${process.env.CLIENT_URL}/links/${url}`;
@@ -78,14 +71,7 @@ function Home() {
 									te permite compartir archivos con cifrado de
 									extremo a extremo
 								</p>
-								{!isAuthenticated && (
-									<Link href="/register" as="/registro">
-										<a className="text-red-500 font-bold text-lg hover:text-red-700">
-											Crea una cuenta gratuita para
-											compartir archivos de hasta 100 MB
-										</a>
-									</Link>
-								)}
+								
 							</div>
 						</div>
 					</>

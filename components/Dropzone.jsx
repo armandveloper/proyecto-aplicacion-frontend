@@ -1,7 +1,6 @@
-import { useState, useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AppContext } from '../context/app/AppContext';
-import { AuthContext } from '../context/auth/AuthContext';
 import Form from './Form';
 
 function Dropzone() {
@@ -9,12 +8,9 @@ function Dropzone() {
 		AppContext
 	);
 
-	const { isAuthenticated } = useContext(AuthContext);
 
 	const onDropRejected = () => {
-		const text = isAuthenticated
-			? 'El límite es de hasta 100 MB'
-			: 'El límite es de 1 MB. Inicie sesión para subir archivos más pesados';
+		const text = 'El límite es de hasta 50 MB';
 		showAlert(text);
 	};
 
@@ -28,8 +24,7 @@ function Dropzone() {
 	} = useDropzone({
 		onDropAccepted,
 		onDropRejected,
-
-		maxSize: isAuthenticated ? 1024 * 1024 * 100 : 1024 * 1024,
+		maxSize: 1024 * 1024 * 50,
 	});
 
 	const fileList = acceptedFiles.map((file) => (
@@ -52,7 +47,7 @@ function Dropzone() {
 						Archivos
 					</h4>
 					<ul>{fileList}</ul>
-					{isAuthenticated && <Form />}
+					<Form />
 					{loading ? (
 						<p className="my-10 text-center text-gray-600">
 							Subiendo Archivo...
@@ -84,7 +79,7 @@ function Dropzone() {
 									type="button"
 									className="bg-blue-700 w-full py-3 rounded-lg text-white my-10 hover:bg-blue-800"
 								>
-									Selecciona archivos para subir
+									Selecciona un archivo para subir
 								</button>
 							</>
 						)}
