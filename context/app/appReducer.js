@@ -29,7 +29,7 @@ const appReducer = (state, action) => {
 				loading: false,
 				filename: '',
 				fileOriginalName: '',
-				downloads: 1,
+				downloads: '1',
 				password: null,
 				user: null,
 				url: '',

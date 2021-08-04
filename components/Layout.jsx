@@ -5,15 +5,15 @@ function Layout({ children }) {
 	return (
 		<>
 			<Head>
-				<title>NodeSend</title>
+				<title>Comparte archivos de forma fácil y eficiente</title>
 				<link
 					href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
 					rel="stylesheet"
 				></link>
 			</Head>
-			<div className="bg-gray-100 min-h-screen">
+			<div className="bg-gray-100 min-h-screen pt-10">
 				<div className="container mx-auto">
-					<Header />
+					{/* <Header /> */}
 					<main className="sm:mt-5 md:mt-20">{children}</main>
 				</div>
 			</div>

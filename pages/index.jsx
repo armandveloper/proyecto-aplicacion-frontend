@@ -6,12 +6,9 @@ import Dropzone from '../components/Dropzone';
 import Alert from '../components/Alert';
 
 function Home() {
-
 	const { alertMessage, url } = useContext(AppContext);
 
 	const urlRef = useRef();
-
-	
 
 	const copyURL = async () => {
 		const fileURL = `${process.env.CLIENT_URL}/links/${url}`;
@@ -60,18 +57,17 @@ function Home() {
 						<div className="lg:flex md:shadow-lg p-5 bg-white rounded-lg py-10">
 							<Dropzone />
 							<div className="md:flex-1 mb-3 mx-2 lg:mt-0">
-								<h2 className="text-4xl font-sans font-bold text-gray-800 my-4">
+								<h2 className="text-3xl font-sans font-bold text-gray-800 my-4">
 									Compartir archivos de forma sencilla y
-									privada
+									eficiente
 								</h2>
 								<p className="text-lg leading-loose">
 									<span className="text-red-500 font-bold">
-										NodeSend
+										Comparte
 									</span>{' '}
-									te permite compartir archivos con cifrado de
-									extremo a extremo
+									tus recursos y/o material de clase de manera
+									más ágil y eficaz
 								</p>
-								
 							</div>
 						</div>
 					</>

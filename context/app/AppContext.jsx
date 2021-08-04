@@ -10,7 +10,7 @@ const initialState = {
 	loading: false,
 	filename: '',
 	fileOriginalName: '',
-	downloads: 1,
+	downloads: '1',
 	password: '',
 	user: null,
 	url: '',
@@ -63,6 +63,13 @@ export const AppProvider = ({ children }) => {
 	};
 
 	const createLink = async () => {
+		const { downloads } = state;
+		if (isNaN(+downloads) || +downloads < 1 || +downloads > 50) {
+			showAlert(
+				'El límite de descargas debe ser un número de entre 1 a 50'
+			);
+			return;
+		}
 		const data = {
 			filename: state.filename,
 			originalName: state.fileOriginalName,
