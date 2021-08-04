@@ -1,5 +1,4 @@
 import { useContext, useRef, useEffect, useState } from 'react';
-import { AuthContext } from '../../context/auth/AuthContext';
 import { AppContext } from '../../context/app/AppContext';
 import apiClient from '../../config/axios';
 import Layout from '../../components/Layout';
@@ -9,9 +8,11 @@ export async function getServerSideProps({ params }) {
 	try {
 		const { slug } = params;
 		const resp = await apiClient.get(`/links/${slug}`);
+		console.log(resp.data);
 		return {
 			props: {
 				filename: resp.data.filename,
+				originalName: resp.data.originalName,
 				password: resp.data.password,
 				url: resp.data.url,
 			},
@@ -34,20 +35,12 @@ export async function getServerSidePaths() {
 	};
 }
 
-function Link({ filename, password, url }) {
-	const { getAuthUser } = useContext(AuthContext);
+function Link({ filename, originalName, password, url }) {
 	const { showAlert, alertMessage } = useContext(AppContext);
 	const [hasPassword, setHasPassword] = useState(password);
 	const [downloadsExceed, setDownloadExceed] = useState(false);
 
 	const passwordRef = useRef();
-
-	useEffect(() => {
-		const token = window.localStorage.getItem('nodesend:token');
-		if (token) {
-			getAuthUser();
-		}
-	}, []);
 
 	const handleVerifyPassword = async (e) => {
 		e.preventDefault();
@@ -139,6 +132,9 @@ function Link({ filename, password, url }) {
 					<h1 className="text-4xl text-center text-gray-700">
 						Descarga tu archivo
 					</h1>
+					<div className="p-4 text-center">
+						<p className="text-2xl text-gray-700">{originalName}</p>
+					</div>
 					<div className="flex items-center justify-center mt-10">
 						<button
 							onClick={handleDownload}
