@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/app/AppContext';
 import apiClient from '../../config/axios';
 import Layout from '../../components/Layout';
@@ -8,7 +8,6 @@ export async function getServerSideProps({ params }) {
 	try {
 		const { slug } = params;
 		const resp = await apiClient.get(`/links/${slug}`);
-		console.log(resp.data);
 		return {
 			props: {
 				filename: resp.data.filename,
@@ -66,12 +65,11 @@ function Link({ filename, originalName, password, url }) {
 			const resp = await apiClient.get(`/files/${filename}/exists`);
 			if (!resp.data.success) return;
 			const anchor = window.document.createElement('a');
-			anchor.href = `${process.env.API_URL}/files/${filename}`;
+			anchor.href = `${process.env.NEXT_PUBLIC_API_URL}/files/${filename}`;
 			window.document.body.appendChild(anchor);
 			anchor.click();
 			anchor.remove();
 		} catch (err) {
-			console.log(err);
 			setDownloadExceed(true);
 		}
 	};

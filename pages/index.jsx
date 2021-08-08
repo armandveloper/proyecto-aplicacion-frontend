@@ -11,7 +11,7 @@ function Home() {
 	const urlRef = useRef();
 
 	const copyURL = async () => {
-		const fileURL = `${process.env.CLIENT_URL}/links/${url}`;
+		const fileURL = `${window.location.origin}/links/${url}`;
 		try {
 			if (window.navigator.clipboard) {
 				return await window.navigator.clipboard.writeText(fileURL);
@@ -39,7 +39,7 @@ function Home() {
 								className="mt-2 bg-transparent focus:outline-none block w-full text-center"
 								ref={urlRef}
 								type="url"
-								value={`${process.env.CLIENT_URL}/links/${url}`}
+								value={`${window.location.origin}/links/${url}`}
 								readOnly={true}
 							/>
 						</p>
